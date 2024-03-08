@@ -1,0 +1,1 @@
+#include "ITeapotDrawingStrategy.h"
