@@ -14,6 +14,7 @@ void Teapot::display() const
 {
 	glPushMatrix();
 
+	glTranslatef(0, -2, 0);
 	glRotatef(30, .5, .0, .0);
 	glColor3f(0.3, 0.4, 0.2);
 	this->strategy->drawTeapot();

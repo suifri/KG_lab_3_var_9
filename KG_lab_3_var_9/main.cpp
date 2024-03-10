@@ -19,6 +19,7 @@ BSpline* bSpline = new BSpline();
 TrimmedBSpline* trim = new TrimmedBSpline();
 
 GLint displayChoice = 0;
+GLboolean isPerspective{ true };
 
 void display(void)
 {
@@ -28,6 +29,22 @@ void display(void)
 	gluLookAt(0.0, 0.0, 5.0,
 		0.0, 0.0, 0.0,
 		0.0, 1.0, 0.0);
+
+	if (isPerspective == false)
+	{
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(-5, 5, -5, 5, -5, 5);
+	}
+	else 
+	{
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(45, 1, 2, 10);
+		gluLookAt(0.0, 0.0, 5.0,
+				0.0, 0.0, 0.0,
+				0.0, 1.0, 0.0);
+	}
 
 	switch (displayChoice)
 	{
@@ -54,6 +71,7 @@ void reshape(const GLint width, const GLint height)
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+	//glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 	gluPerspective(45.0, static_cast<GLfloat>(width) / static_cast<GLfloat>(height), 0.1, 100.);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -103,6 +121,12 @@ void mainMenuHandler(const GLint choice)
 		break;
 	case 3:
 		displayChoice = 3;
+		break;
+	case 4:
+		isPerspective = true;
+		break;
+	case 5:
+		isPerspective = false;
 		break;
 	default:
 		break;
@@ -173,6 +197,8 @@ int main(int argc, char** argv)
 	glutAddMenuEntry("Trimmed B-spline", 3);
 	glutAddSubMenu("Teapot texture", teapotSubMenu);
 	glutAddSubMenu("Trimmed B-spline texture", bSplineSubMenu);
+	glutAddMenuEntry("Perspective", 4);
+	glutAddMenuEntry("Ortho", 5);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 	glutMainLoop();

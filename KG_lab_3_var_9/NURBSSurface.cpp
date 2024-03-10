@@ -48,6 +48,7 @@ void NURBSSurface::display()
 
 	glRotatef(330.0f, 1.0f, 0.0f, 0.0f);
 	glScalef(0.5f, 0.5f, 0.5f);
+	glTranslatef(0, 2, 0);
 
 	gluBeginSurface(this->nurbs);
 	glColor3f(.2, 0.5, 0.7);
@@ -55,4 +56,6 @@ void NURBSSurface::display()
 	gluEndSurface(this->nurbs);
 
 	glPopMatrix();
+
+	glutPostRedisplay();
 }

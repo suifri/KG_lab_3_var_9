@@ -47,11 +47,14 @@ void BSpline::display()
 
 	glRotatef(330.0f, 1.0f, 0.0f, 0.0f);
 	glScalef(0.5f, 0.5f, 0.5f);
+	glTranslatef(0, 2, 0);
 
 	gluBeginSurface(this->nurbs);
 	glColor3f(.2, 0.5, 0.7);
 	gluNurbsSurface(this->nurbs, 8, knots, 8, knots, 4 * 3, 3, **this->controlPoints, 4, 4, GL_MAP2_VERTEX_3);
 	gluEndSurface(this->nurbs);
+
+	glutPostRedisplay();
 }
 
 

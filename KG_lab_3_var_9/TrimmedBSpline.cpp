@@ -14,6 +14,7 @@ void TrimmedBSpline::display()
 	glPushMatrix();
 	glRotatef(330.0, 1., 0., 0.);
 	glScalef(0.5, 0.5, 0.5);
+	glTranslatef(0, 2, 0);
 
 	gluBeginSurface(this->nurbs);
 	gluNurbsSurface(this->nurbs, 8, knots, 8, knots,
@@ -42,4 +43,6 @@ void TrimmedBSpline::display()
 	gluEndSurface(this->nurbs);
 
 	glPopMatrix();
+
+	glutPostRedisplay();
 }
